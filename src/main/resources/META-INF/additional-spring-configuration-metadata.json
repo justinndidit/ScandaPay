@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "spring.jwt_secret_key",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jwt_secret_key'"
+  },
+  {
+    "name": "spring.cloudinary.API_-sECRET",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloudinary.API_-sECRET'"
+  },
+  {
+    "name": "spring.cloudinary.API_KEY",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloudinary.API_KEY'"
+  }
+]}
