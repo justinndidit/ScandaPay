@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtService {
 
-        private final Dotenv dotenv;
+    private final Dotenv dotenv;
     public boolean isTokenValid(String token, UserDetails user) {
         String userEmail = extractEmail(token);
         return userEmail.equals(user.getUsername()) && !isTokenExpired(token);
@@ -60,8 +60,7 @@ public class JwtService {
     }
 
     private SecretKey getSignInKey() {
-
-        byte[] keyBytes = Decoders.BASE64URL.decode(dotenv.get("jwt_secret_key"));
+        byte[] keyBytes = Decoders.BASE64URL.decode(dotenv.get("JWT_SECRET_KEY"));
         return Keys.hmacShaKeyFor(keyBytes);
     }
 

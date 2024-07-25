@@ -24,7 +24,6 @@ public class WebClientConfig {
                     headers.setBearerAuth(FLUTTER_SECRET_KEY);
                     headers.set("Content-Type", "application/json");
                     // headers.set("Content-Type", "text/html; charset=UTF-8");
-
                     headers.set("Accept", "application/json");
                     
                 })

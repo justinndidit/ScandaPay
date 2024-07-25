@@ -1,18 +1,15 @@
 package com.surgee.ScandaPay.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.surgee.ScandaPay.services.FinanceManagementService;
 import com.surgee.ScandaPay.requests.TransferMoneyRequest;
 import com.surgee.ScandaPay.util.AccountNumberGenerator;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.GetMapping;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
+import com.surgee.ScandaPay.DTO.HttpResponseDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,26 +21,13 @@ public class FinanceManagementController {
     private final FinanceManagementService financeManagementService;
     private final AccountNumberGenerator accountNumberGenerator;
     @PostMapping("/transfer")
-    public ResponseEntity<?> transferToAccount(@RequestBody TransferMoneyRequest request) {
-        String callback_url = "http://127.0.0.1:8000/api/v1/callbacks/transfer";
-        String reference = accountNumberGenerator.generateTransferReference();
-
-        financeManagementService.transferToAccount(
-            request.getAccount_bank(),
-            request.getAccount_number(),
-            request.getAmount(),
-            request.getNarration(),
-            request.getCurrency(),
-            callback_url,
-            reference,
-            request.getDebit_currency()
-            );
+    public ResponseEntity<?> transferToAccount() {
         return null;
     }
     @PostMapping("/transfer/review")
-    public ResponseEntity<?> reviewTransferDetails(@RequestBody TransferMoneyRequest request) {
+    public ResponseEntity<HttpResponseDTO> reviewTransferDetails(@RequestBody TransferMoneyRequest request) {
         String callback_url = "http://127.0.0.1:8000/api/v1/callbacks/transfer";
-        String reference = accountNumberGenerator.generateTransferReference();
+        String reference = generateReference();
         return financeManagementService.reviewTransferToAccount(
             request.getAccount_name(),
             request.getAccount_bank(),
@@ -64,9 +48,9 @@ public class FinanceManagementController {
     //     return financeManagementService.getTransactionFee(amount, destination_currency, source_currency);
     // }
 
-    @PostMapping("callbacks/transfer")
-    public ResponseEntity<?> transferCallback() {
-        System.out.print("Call back hit");
-        return null;
+    
+
+    private String generateReference() {
+        return accountNumberGenerator.generateTransferReference();
     }
 }

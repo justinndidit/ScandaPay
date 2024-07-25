@@ -97,19 +97,22 @@ public class AuthService {
 
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
 
-            confirmationTokenRepository.save(confirmationToken);
-
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(user.getEmail());
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setText("To confirm your account, please click here : "
                     +"http://localhost:8000/auth/confirm-account?token="+confirmationToken.getConfirmationToken());
             emailService.sendEmail(mailMessage);
-    
+            System.out.println(user);    
+
             String token = jwtService.generateToken(user);
+            System.out.println(token);    
             userRepository.save(user);
+            confirmationTokenRepository.save(confirmationToken);
             flutterResponse.getData().setUser(user);
             flutterRepository.save(flutterResponse.getData());
+            System.out.println(flutterResponse.getData());    
+
 
 
             status = HttpStatus.OK;

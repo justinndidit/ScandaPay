@@ -32,7 +32,7 @@ public class UserController {
            
     }
 
-    @GetMapping("/{user_id}/dashboard")
+    @GetMapping("/{user_id}/dashboard") 
     public ResponseEntity<HttpResponseDTO> home(@PathVariable Long user_id) {
         return userService.dashboard(user_id);
     }

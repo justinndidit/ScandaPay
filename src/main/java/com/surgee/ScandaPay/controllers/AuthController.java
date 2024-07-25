@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.util.Map;
 
 import com.surgee.ScandaPay.DTO.HttpResponseDTO;
@@ -56,13 +57,15 @@ public class AuthController {
 
     @GetMapping("/confirm-account")
     public String confirmUserAccount() {
-        return "Everything good";
+        return "User Email confirmed.";
     }
 
-    @GetMapping("/reset-password")
-    public String confirmUserAccountGet(@RequestParam("token")String confirmationToken) {
-        return "Reset password";
-    }
+   
+
+    // @GetMapping("/reset-password")
+    // public String confirmUserAccountGet(@RequestParam("token")String confirmationToken) {
+    //     return "Reset password";
+    // }
 
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody PasswordResetRequest request, @RequestParam("token")String confirmationToken) {
@@ -80,6 +83,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<HttpResponseDTO> loginUser(@RequestBody HttpLoginRequest request) {
+        System.out.println("request");
+        System.out.println(request);
+
+        System.out.println("Object");
+    
+
+
         return authService.loginUser(request.getEmail(), request.getPassword());
     }
 }
